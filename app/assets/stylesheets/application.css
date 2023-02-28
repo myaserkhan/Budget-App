@@ -31,7 +31,7 @@
 } */
 
 img {
-  width: 4rem;
+  width: 3.8rem;
   height: auto;
 }
 
@@ -83,7 +83,7 @@ input::placeholder {
 
 .group h2 {
   color: #858a91db;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .group_detail_page h2 {
@@ -273,6 +273,11 @@ input::placeholder {
 }
 
 .group > div,
+.group_header > div {
+  width: 100%;
+  justify-content: space-between;
+}
+
 .group > div:last-child {
   align-self: flex-end;
 }
@@ -288,7 +293,7 @@ input::placeholder {
   border: none;
   height: 50px;
   width: 94vw;
-  margin: 0 auto 0.5rem auto;
+  margin: 0.5rem auto;
   border-radius: 3px;
   box-shadow: 2px 2px 3px var(--grey3), -1px 0 3px var(--grey3);
 }
@@ -301,7 +306,7 @@ input::placeholder {
 .list_btn {
   align-self: flex-end;
   font-size: 0.7rem;
-  padding: 0.4rem 0.6rem;
+  padding: 0.3rem 0.5rem;
   font-style: italic;
   background: var(--orange);
   border: none;
@@ -310,6 +315,21 @@ input::placeholder {
 
 .list_btn:hover {
   box-shadow: 3px 3px 3px var(--dark);
+}
+
+.list_gen {
+  flex-direction: column;
+}
+
+.list_gen h3 {
+  align-self: flex-end;
+  font-size: 1rem;
+  color: var(--dark);
+}
+
+.btn_list {
+  display: flex;
+  gap: 0.3rem;
 }
 
 /* -------group details page-------- */
@@ -338,19 +358,20 @@ input::placeholder {
   background: var(--red2);
 }
 
-/* -------group details page-------- */
+/* -------edit/add group page-------- */
 
-.edit_group_page {
+.edit_add_page {
   display: flex;
   flex-direction: column;
   padding: 1em 0;
 }
 
-.edit_group_page form {
+.edit_add_page form {
   padding: 1.3rem 1rem;
 }
 
-.edit_group_page form input[type="text"] {
+.edit_add_page form input[type="text"],
+.edit_add_page form input[type="number"] {
   width: 100%;
   border: none;
   background: var(--grey2);
@@ -394,3 +415,30 @@ form input[type="file"]::-ms-browse {
 }
 
 /* -------expenses_page-------- */
+
+.expenses_page .group_header {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.2rem 1rem;
+  gap: 0.6rem;
+}
+
+.scroll {
+  overflow: scroll;
+}
+
+.header_name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* -------add expenses page-------- */
+
+.edit_add_page form input[type="text"] {
+  margin: 0.5rem 0;
+}
+
+.edit_add_page form input[type="number"] {
+  margin: 0.5rem 0;
+}

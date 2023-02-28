@@ -44,10 +44,10 @@ class GroupsController < ApplicationController
     @group_expenses.each do |group_expense|
       expense_id = group_expense.expense_id
       group_expense.destroy
-      expense = Expense.delete(expense_id)
+      Expense.delete(expense_id)
     end
     if @group.destroy
-      redirect_to groups_path, notice: 'Groups was deleted successfully'
+      redirect_to groups_path, notice: 'Group was deleted successfully'
     else
       flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
       render :index, status: 400
