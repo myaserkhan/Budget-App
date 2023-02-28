@@ -34,6 +34,15 @@ class GroupsController < ApplicationController
     end
   end
 
+  def destroy
+    if @group.destroy
+      redirect_to groups_path, notice: 'Groups was deleted successfully'
+    else
+      flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
+      render :index, status: 400
+    end
+  end
+
   private
 
   def find_user
