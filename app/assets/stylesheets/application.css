@@ -195,6 +195,10 @@ input::placeholder {
   color: var(--grey2);
 }
 
+.not_found a {
+  font-size: 0.9rem;
+}
+
 .group > div > a {
   display: flex;
   gap: 0.4rem;
@@ -454,4 +458,16 @@ form input[type="file"]::-ms-browse {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+/* -------expense detail page-------- */
+
+.not_found {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.not_found .list_btn {
+  padding: 0.8rem 1.3rem;
 }

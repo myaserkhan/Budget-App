@@ -39,15 +39,14 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    @group = Group.find(params[:id])
     @group_expenses = GroupExpense.where(group_id: @group.id)
     @group_expenses.each do |group_expense|
       expense_id = group_expense.expense_id
       group_expense.destroy
-      Expense.delete(expense_id)
+      expense = Expense.delete(expense_id)
     end
     if @group.destroy
-      redirect_to groups_path, notice: 'Group was deleted successfully'
+      redirect_to groups_path, notice: 'Groups was deleted successfully'
     else
       flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
       render :index, status: 400
@@ -61,7 +60,10 @@ class GroupsController < ApplicationController
   end
 
   def find_group
-    @group = Group.find_by_id(params[:id])
+    @group = Group.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = 'Group not found!'
+    redirect_to not_found_index_path
   end
 
   def group_params
