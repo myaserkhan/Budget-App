@@ -36,6 +36,7 @@ class GroupsController < ApplicationController
     end
   end
 
+  # rubocop:disable Lint/UselessAssignment
   def destroy
     if can? :edit, @group
       @group_expenses = GroupExpense.where(group_id: @group.id)
@@ -51,10 +52,11 @@ class GroupsController < ApplicationController
         render :index, status: 400
       end
     else
-      flash[:alert] = 'UnAuthorized'
+      flash[:alert] = 'Un Authorized'
       redirect_to groups_path
     end
   end
+  # rubocop:enable Lint/UselessAssignment
 
   private
 
