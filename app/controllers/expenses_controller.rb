@@ -1,10 +1,14 @@
 class ExpensesController < ApplicationController
+  load_and_authorize_resource
+
   before_action :find_user
   before_action :find_group
   before_action :find_group_expenses
   before_action :find_expense, only: %i[show edit update destroy]
 
-  def index; end
+  def index
+    authorize! :manage, @group
+  end
 
   def show; end
 
@@ -36,16 +40,21 @@ class ExpensesController < ApplicationController
   end
 
   def destroy
-    @group_expenses = GroupExpense.where(expense_id: @expense.id)
-    @group_expenses.each do |group_expense|
-      expense_id = group_expense.expense_id
-      group_expense.destroy
-    end
-    if @expense.destroy
-      redirect_to group_expenses_path(group_id: @group.id), notice: 'Expense was deleted successfully'
+    if can? :edit, @expense
+      @group_expenses = GroupExpense.where(expense_id: @expense.id)
+      @group_expenses.each do |group_expense|
+        expense_id = group_expense.expense_id
+        group_expense.destroy
+      end
+      if @expense.destroy
+        redirect_to group_expenses_path(group_id: @group.id), notice: 'Expense was deleted successfully'
+      else
+        flash.now[:alert] = @expense.errors.full_messages.first if @expense.errors.any?
+        render :index, status: 400
+      end
     else
-      flash.now[:alert] = @expense.errors.full_messages.first if @expense.errors.any?
-      render :index, status: 400
+      flash[:alert] = 'Un Authorized'
+      redirect_to groups_path
     end
   end
 
