@@ -1,11 +1,11 @@
 databases:
   - name: postgres
-    databaseName: postgres
-    user: postgres
+    databaseName: budget_app_7hac
+    user: yasir
 
 services:
   - type: web
-    name: postgres
+    name: budgetapp
     env: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
