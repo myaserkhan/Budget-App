@@ -1,0 +1,18 @@
+databases:
+  - name: postgres
+    databaseName: postgres
+    user: postgres
+
+services:
+  - type: web
+    name: postgres
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: postgres
+          property: postgres://yasir:lchJoNphADtGVAi1ARDzJdIXp4wjfH4u@dpg-cfvhvh82qv24oq55mofg-a/budget_app_7hac
+      - key: RAILS_MASTER_KEY
+        sync: false
